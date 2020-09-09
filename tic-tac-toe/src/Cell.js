@@ -4,7 +4,7 @@ const Cell = (props) =>
   <div 
     className="cell" 
     onClick={props.onClick}>
-        {props.getCellValue()}
+        {props.getValue()}
   </div>
 
 export default Cell;

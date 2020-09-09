@@ -29,12 +29,13 @@ const App = () => {
     setBoardState(board);
     return board;
   };
+  const wasBoardUpdated = (previousBoard, updateBoard) => 
+    !previousBoard.every((value, index) => value === updateBoard()[index]);
   const makeMove = (
-    previousBoard,
-    updateBoard,
+    wasBoardUpdated,
     switchPlayerTurn
   ) => {
-    if(previousBoard.every((value, index) => value === updateBoard()[index])) {
+    if(!wasBoardUpdated()) {
       return;
     }
     switchPlayerTurn();  
@@ -53,12 +54,13 @@ const App = () => {
           .map((_, i) => (
             <Cell 
               key={i}
-              getCellValue={() => boardState[i]}
+              getValue={() => boardState[i]}
               onClick={() => {
                 if(!gameEnded(boardState)) {
                   makeMove(
-                    boardState,
-                    () => updateCell(i, playerTurnState),
+                    () => wasBoardUpdated(
+                      boardState,
+                      () => updateCell(i, playerTurnState)),
                     switchPlayerTurn)
                 }}} />
           ))}
