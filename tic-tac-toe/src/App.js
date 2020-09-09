@@ -5,16 +5,16 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <div class="wrapper">
-        <div class="box"><span>X</span></div>
-        <div class="box"><span>O</span></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
+      <div id="board">
+        <div class="cell">X</div>
+        <div class="cell">O</div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
       </div>
     </div>
   );
