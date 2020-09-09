@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
+import Cell from './Cell'
 import './App.css';
-
-const Cell = (props) => 
-  <div 
-    className="cell" 
-    onClick={props.onClick}>{
-      props.getCellValue()}
-  </div>
-
 
 const App = () => {
   const [playerTurnState, setPlayerTurnState] = useState('X');
   const [boardState, setBoardState] = useState(Array(9).fill(''));
-  const getPlayerTurnState = () => playerTurnState;
+
   const switchPlayerTurn = () => setPlayerTurnState(playerTurnState === 'X' ? 'O' : 'X');
   const gameTied = board => 
     board.filter(cellValue => cellValue === '').length === 0
@@ -31,6 +24,11 @@ const App = () => {
   const gameEnded = board => 
     gameTied(board)
     || gameWon(board);
+  const updateCell = (cellIndex, player) => {
+    const board = boardState.map((_, i) => cellIndex === i && _ === '' ? player : _);
+    setBoardState(board);
+    return board;
+  };
 
   return (
     <div className="App">
@@ -49,14 +47,9 @@ const App = () => {
               onClick={() => 
                 makeMove(
                   boardState,
-                  value => {
-                    const board = boardState.map((_, i2) => i === i2 && _ === '' ? value : _);
-                    setBoardState(board);
-                    return board;
-                  },
-                  getPlayerTurnState,
-                  switchPlayerTurn,
-                  gameEnded)} />
+                  () => updateCell(i, playerTurnState),
+                  playerTurnState,
+                  switchPlayerTurn)} />
           ))}
       </div>
     </div>
@@ -66,25 +59,13 @@ const App = () => {
 const makeMove = (
   previousBoard,
   updateBoard,
-  getPlayerTurnState, 
-  switchPlayerTurn,
-  gameEnded
+  playerTurnState,
+  switchPlayerTurn
 ) => {
-  if(gameEnded(previousBoard)) {
+  if(previousBoard.every((value, index) => value === updateBoard(playerTurnState)[index])) {
     return;
   }
-
-  const updatedBoard = updateBoard(getPlayerTurnState());
-
-  if(gameEnded(updatedBoard)) {
-    console.log("end");
-    return;
-  }
-
-  if(!previousBoard.every((value, index) => value === updatedBoard[index])) {
-    console.log("swith player");
-    switchPlayerTurn();  
-  }
+  switchPlayerTurn();  
 }
 
 export default App;
