@@ -1,15 +1,20 @@
+.App {
+  margin: 100px auto;
+  width: 310px;
+}
+
 #board {
   display: inline-grid;
   grid-template-columns:  repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
-  grid-gap: 10px;
-  background-color: #fff;
+  grid-gap: 5px;
+  background-color: #444;
   color: #444;
 }
 
 .cell {
-  background-color: #444;
-  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
