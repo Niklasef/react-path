@@ -29,6 +29,16 @@ const App = () => {
     setBoardState(board);
     return board;
   };
+  const makeMove = (
+    previousBoard,
+    updateBoard,
+    switchPlayerTurn
+  ) => {
+    if(previousBoard.every((value, index) => value === updateBoard()[index])) {
+      return;
+    }
+    switchPlayerTurn();  
+  };  
 
   return (
     <div className="App">
@@ -55,17 +65,6 @@ const App = () => {
       </div>
     </div>
   );
-}
-
-const makeMove = (
-  previousBoard,
-  updateBoard,
-  switchPlayerTurn
-) => {
-  if(previousBoard.every((value, index) => value === updateBoard()[index])) {
-    return;
-  }
-  switchPlayerTurn();  
 }
 
 export default App;
