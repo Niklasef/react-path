@@ -44,12 +44,13 @@ const App = () => {
             <Cell 
               key={i}
               getCellValue={() => boardState[i]}
-              onClick={() => 
-                makeMove(
-                  boardState,
-                  () => updateCell(i, playerTurnState),
-                  playerTurnState,
-                  switchPlayerTurn)} />
+              onClick={() => {
+                if(!gameEnded(boardState)) {
+                  makeMove(
+                    boardState,
+                    () => updateCell(i, playerTurnState),
+                    switchPlayerTurn)
+                }}} />
           ))}
       </div>
     </div>
@@ -59,10 +60,9 @@ const App = () => {
 const makeMove = (
   previousBoard,
   updateBoard,
-  playerTurnState,
   switchPlayerTurn
 ) => {
-  if(previousBoard.every((value, index) => value === updateBoard(playerTurnState)[index])) {
+  if(previousBoard.every((value, index) => value === updateBoard()[index])) {
     return;
   }
   switchPlayerTurn();  
