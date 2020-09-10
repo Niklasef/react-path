@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Cell from './Cell'
+import Board from './Board'
 import './App.css';
 
 const App = () => {
@@ -40,6 +40,14 @@ const App = () => {
     }
     switchPlayerTurn();  
   };  
+  const onCellClick = cellIndex =>{
+    if(!gameEnded(boardState)) {
+      makeMove(
+        () => wasBoardUpdated(
+          boardState,
+          () => updateCell(cellIndex, playerTurnState)),
+        switchPlayerTurn)
+    }}
 
   return (
     <div className="App">
@@ -48,23 +56,10 @@ const App = () => {
         <span style={{display: gameTied(boardState) ? 'block' : 'none'}}>Tied</span>
         <span style={{display: gameWon(boardState) ? 'block' : 'none'}}>{gameWonBy(boardState, 'X') ? 'X' : 'O'} won</span>
       </div>
-      <div id="board">
-        {Array(9)
-          .fill()
-          .map((_, i) => (
-            <Cell 
-              key={i}
-              getValue={() => boardState[i]}
-              onClick={() => {
-                if(!gameEnded(boardState)) {
-                  makeMove(
-                    () => wasBoardUpdated(
-                      boardState,
-                      () => updateCell(i, playerTurnState)),
-                    switchPlayerTurn)
-                }}} />
-          ))}
-      </div>
+      <Board
+        getCellValue={cellIndex => boardState[cellIndex]}
+        onCellClick={onCellClick}
+      />
     </div>
   );
 }
