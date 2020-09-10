@@ -14,12 +14,11 @@
   grid-template-columns:  repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
   grid-gap: 5px;
-  background-color: #444;
-  color: #444;
+  background-color: #f7f7f1;  
 }
 
 .cell {
-  background-color: #fff;
+  background-color: #262835;
   display: flex;
   justify-content: center;
   align-items: center;
