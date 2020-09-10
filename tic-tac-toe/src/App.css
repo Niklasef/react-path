@@ -1,6 +1,12 @@
 .App {
-  margin: 100px auto;
+  margin: auto;
   width: 310px;
+}
+
+.Status {
+  text-align: center;
+  font-size: 40px;
+  padding: 20px;
 }
 
 #board {
