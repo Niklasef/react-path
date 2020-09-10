@@ -32,6 +32,9 @@ const App = () => {
 export default App;
 
 const gameTied = board => 
+  boardFull(board) && !gameWon(board);
+
+const boardFull = board => 
   board.filter(cellValue => cellValue === '').length === 0
 
 const gameWonBy = (board, player) => 
