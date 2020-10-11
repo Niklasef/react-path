@@ -11,7 +11,6 @@ const App = () => {
   ]);
 
   const onCellClick = (x, y) => {
-    console.log("onCellClick: " + x + " " + y);
     if (!gameEnded(boardState)) {
       makeMove(
         () => wasBoardUpdated(
@@ -66,9 +65,7 @@ const makeMove = (
   wasBoardUpdated,
   switchPlayerTurn
 ) => {
-  console.log("makeMove");
   if (!wasBoardUpdated()) {
-    console.log("!wasBoardUpdated");
     return;
   }
   switchPlayerTurn();
