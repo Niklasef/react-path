@@ -3,14 +3,20 @@ import Cell from './Cell'
 
 const Board = (props) => (
     <div id="board">
-    {Array(9)
-        .fill()
-        .map((_, i) => (
-        <Cell 
-            key={i}
-            getValue={() => props.getCellValue(i)}
-            onClick={() => props.onCellClick(i) } />
-        ))}
+        {Array(3)
+            .fill()
+            .map((_, x) =>
+                Array(3)
+                    .fill()
+                    .map((_, y) =>
+                        (<Cell
+                            key={x.toString() + y.toString()}
+                            getValue={() => props.getCellValue(x, y)}
+                            onClick={() => props.onCellClick(x, y)} />
+                        )
+                    )
+            )
+        }
     </div>
 );
 
